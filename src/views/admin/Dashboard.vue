@@ -1,0 +1,40 @@
+<template>
+    <section class="section">
+        <div class="container">
+
+          <!-- Let them go to specific orderpage for actions -->
+          <!-- List all users here  here -->
+            <!-- {{ orders }} -->
+            <ul>
+              <li v-for="(order,key) in orders" :key="key">
+                <a :href="'/admin/order/'+order['.key']">
+                  <!-- {{ order }} -->
+                </a>
+                <div v-for="(o,k) in order" :key="k">
+                  <a :href="'/admin/order/'+order['.key'] + '/' + k">
+                    OrderID: {{ o.createdAt }}
+                  </a>
+                </div>
+              </li>
+            </ul>
+        </div>
+    </section>
+</template>
+<script>
+import firebase from 'firebase/app';
+import 'firebase/database';
+
+export default {
+  name: 'AdminDashboard',
+  firebase() {
+    return {
+      orders: firebase.database().ref('orders'),
+    };
+  },
+  data() {
+    return {
+      orders: [],
+    };
+  },
+};
+</script>

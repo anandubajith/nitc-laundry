@@ -1,0 +1,23 @@
+{
+  "rules": {
+    "ambassadors": {
+      ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1')",
+      ".write": "auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1'",
+      "$uid": {
+        ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)",
+        ".write": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)"
+      }
+    },
+    "orders": {
+      ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1')",
+      ".write": "auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1'",
+      "$uid": {
+        ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)",
+        ".write": "($uid === auth.uid) && !data.exists()",
+        "$pushID": {
+          ".write": "!data.exists()"
+        }
+      }
+    }
+  }
+}

@@ -1,32 +1,69 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+     <b-navbar>
+        <template slot="brand">
+            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+                   <b-icon
+                      icon="tshirt-v">
+                  </b-icon>
+                <h1 class="is-size-4"> Laundry</h1>
+            </b-navbar-item>
+        </template>
+        <template slot="start">
+            <b-navbar-item href="#">
+                How it works
+            </b-navbar-item>
+            <b-navbar-item href="#">
+              About
+            </b-navbar-item>
+        </template>
+
+        <template slot="end">
+            <b-navbar-item tag="div">
+                <div class="buttons">
+                    <a class="button is-danger"
+                       @click="logout()" v-if="currentUser">
+                        <strong>Logout</strong>
+                    </a>
+                </div>
+            </b-navbar-item>
+        </template>
+    </b-navbar>
+      <transition name="slide">
+      <router-view />
+      </transition>
+    <!-- <footer>
+      <router-link to="/about">about</router-link>
+      &middot;
+      <router-link to="/contact">contact</router-link>
+      <br>
+      <a href="#" @click="logout()" v-if="$route.path === '/home'">
+        logout
+      </a>
+    </footer> -->
   </div>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+export default {
+  name: 'App',
+  data() {
+    return {
+      currentUser: firebase.auth().currentUser,
+    };
+  },
+  methods: {
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace('/login');
+        });
+    },
+  },
+};
+</script>
