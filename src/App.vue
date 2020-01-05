@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <b-navbar>
+     <b-navbar type="is-light" :fixed-top="true">
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ path: '/' }">
                    <b-icon
@@ -13,7 +13,7 @@
             <b-navbar-item href="#">
                 How it works
             </b-navbar-item>
-            <b-navbar-item href="#">
+            <b-navbar-item href="/about">
               About
             </b-navbar-item>
         </template>

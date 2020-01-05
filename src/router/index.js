@@ -8,9 +8,6 @@ import Login from '../views/Login.vue';
 import About from '../views/About.vue';
 import NewOrder from '../views/NewOrder.vue';
 import RegisterCA from '../views/RegisterCA.vue';
-import AdminLogin from '../views/admin/Login.vue';
-import AdminDashboard from '../views/admin/Dashboard.vue';
-import AdminSingleOrder from '../views/admin/SingleOrder.vue';
 
 Vue.use(VueRouter);
 
@@ -60,12 +57,12 @@ const routes = [
   {
     path: '/admin/login',
     name: 'AdminLogin',
-    component: AdminLogin,
+    component: () => import(/* webpackChunkName: "admin" */'../views/admin/Login.vue'),
   },
   {
     path: '/admin/dashboard',
     name: 'AdminDashboard',
-    component: AdminDashboard,
+    component: () => import(/* webpackChunkName: "admin" */'../views/admin/Dashboard.vue'),
     meta: {
       requiresAuth: true,
     },
@@ -73,7 +70,7 @@ const routes = [
   {
     path: '/admin/order/:user/:order',
     name: 'AdminSingleOrder',
-    component: AdminSingleOrder,
+    component: () => import(/* webpackChunkName: "admin" */'../views/admin/SingleOrder.vue'),
     meta: {
       requiresAuth: true,
     },

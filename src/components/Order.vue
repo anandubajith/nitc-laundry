@@ -2,28 +2,28 @@
   <div class="order box">
       <div class="columns is-multiline">
           <div class="column is-vertical-center is-one-third">
-              <b>Order #123</b>
+              <b>Order #{{ order.id }}</b>
           </div>
           <div class="column is-vertical-center is-one-third">
              {{ (new Date(order.createdAt)).toLocaleString() }}
              -
              <b>{{ order.status }}</b>
           </div>
-          <div class="column is-one-third has-text-right">
+          <div class="column is-one-third has-text-centered">
               <b-button type="is-primary" @click="showDetails = !showDetails">
-                  More info
+                  {{ showDetails ? 'Less' : 'More' }}
               </b-button>
           </div>
       </div>
       <div class="columns content" v-if="showDetails">
-        <div class="column is-half">
+        <div class="column is-half is-vertical-center">
                 <ul>
                     <li v-for="(item,key) in order.items" :key="key">
                         {{ item.type }} x {{ item.quantity }}
                     </li>
                 </ul>
           </div>
-          <div class="column is-half">
+          <div class="column is-half is-vertical-center">
             Total Cost: ₹ ??
           </div>
       </div>

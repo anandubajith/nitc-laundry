@@ -1,42 +1,53 @@
 <template>
   <section class="section home">
     <div class="container">
-      <div class="stats">
-        <img class="profile" :src="photo" alt />
-        <div class="">
-           <h2 class="is-size-4">{{ userData.name }}</h2>
-          <!-- <a class="logout button" href="#" @click="logout()">Logout</a> -->
+      <div class="columns profile is-multiline">
+        <div class="column is-narrow-tablet">
+          <img :src="photo" style="width:200px;border-radius:100%" alt="Profile Photo">
         </div>
-    </div>
-    <div>
-      <!-- Should have option to build the order -->
-      <!-- WHen the order is submitted Store that in UserObject [ Pending orders ] -->
-      <!-- Then move it to /orders [ only admin write ] -->
-          Branch: {{ userData.branch }} <br>
-          Email: {{ userData.email }} <br>
-          Hoste: {{ userData.hostel }} <br>
-          Phone: {{ userData.phone }} <br>
-          Room: {{ userData.room }}<br>
-          Year: {{ userData.year }}
+        <div class="column  is-vertical-center">
+          <div class="profile-block">
+            <h4 class="is-size-3">{{ userData.name }}</h4>
+            <h4 class="is-size-4">{{ userData.phone }}</h4>
+            <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
+            <p> {{ userData.branch }} {{ userData.year +' year'}} </p>
+            <p style="margin-top:10px">
+              <b-button tag="router-link" to="/register">
+                Edit Info
+              </b-button>
+            </p>
+          </div>
         </div>
-      <div>
-            <b-button type="is-primary" tag="router-link" to="/order/new">Place order</b-button>
-            &nbsp;
-            <b-button type="is-info" tag="router-link" to="/register">Edit Info</b-button>
       </div>
-<hr>
-        <div>
-          <h4 class="is-size-4">Past Orders</h4>
-          <hr>
-          <ul>
-            <Order v-for="(order, key) in orders" :order="order" :key="key" />
-          </ul>
-    </div>
+      <hr>
+      <div class="has-text-centered">
+         <b-button tag="router-link"
+                to="/order/new"
+                icon-left="cart"
+                size="is-large"
+                type="is-link">
+                Place Order
+            </b-button>
+      </div>
+      <hr>
+      <div>
+        <h4 class="is-size-4 title">Past Orders</h4>
+        <div class="orders">
+          <Order v-for="(order, key) in orders" :order="order" :key="key" />
+        </div>
+      </div>
     </div>
   </section>
 </template>
 <style>
-
+@media screen and (max-width:600px) {
+  .profile {
+    text-align:center
+  }
+  .profile-block {
+    margin:auto;
+  }
+}
 </style>
 <script>
 import firebase from 'firebase/app';
@@ -48,7 +59,7 @@ export default {
   name: 'DashboardCA',
   data() {
     return {
-      orders: {},
+      orders: [],
       photo: firebase.auth().currentUser.photoURL,
       uid: firebase.auth().currentUser.uid,
       success: false,
@@ -76,7 +87,7 @@ export default {
     const userId = firebase.auth().currentUser.uid;
     return {
       userData: firebase.database().ref(`ambassadors/${userId}`),
-      orders: firebase.database().ref(`orders/${userId}`),
+      orders: firebase.database().ref(`orders/${userId}`).orderByChild('createdAt').limitToLast(10),
     };
   },
   beforeUpdate() {

@@ -85,6 +85,7 @@ export default {
         .database()
         .ref(`orders/${firebase.auth().currentUser.uid}`)
         .push({
+          id: Math.floor(Math.random() * 1000),
           createdAt: Date.now(),
           items: this.items,
           status: 'pending',

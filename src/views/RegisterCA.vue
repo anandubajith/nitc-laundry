@@ -2,49 +2,70 @@
   <section class="section">
     <div class="container">
     <div class="register" v-if="!success">
-      <h2 class="header">Please fill in your details</h2>
-      <img :src="photo" class="profile">
+      <h2 class="is-size-3">Please fill in your details</h2>
+      <hr>
+      <img :src="photo" class="profile-img">
       <form v-on:submit.prevent="addCA" autocomplete="off">
         <b-field label="Name">
             <b-input v-model="name" placeholder="Enter your name"></b-input>
         </b-field>
-        <b-field label="Name">
-            <b-input v-model="branch" placeholder="Enter your Branch"></b-input>
-        </b-field>
-        <b-field label="Year">
-            <b-select placeholder="Select Year" v-model="year" required>
-                <option value="first">First</option>
-                <option value="second">Second</option>
-            <option value="third">Third</option>
-            <option value="fourth">Fourth</option>
+        <b-field grouped>
+            <b-field label="Year" expanded>
+            <b-select placeholder="Select Year" v-model="year" required expanded>
+                <option value="First">First</option>
+                <option value="Second">Second</option>
+            <option value="Third">Third</option>
+            <option value="Fourth">Fourth</option>
             </b-select>
         </b-field>
-        <b-field label="Hostel">
-            <b-select placeholder="Select Hostel" v-model="hostel" required>
-                <option value="MHB">MHB</option>
+        <b-field label="Branch" expanded>
+            <b-input v-model="branch" placeholder="Enter your Branch"></b-input>
+        </b-field>
+        </b-field>
+        <b-field grouped>
+<b-field label="Hostel" expanded>
+            <b-select placeholder="Select Hostel" v-model="hostel" expanded required>
+                <option value="MegaBoys">Mega Boys Hostel</option>
                 <option value="A">A Hostel</option>
-            <option value="B">B Hostel</option>
-            <option value="C">C Hostel</option>
-            <option value="D">D Hostel</option>
+                <option value="B">B Hostel</option>
+                <option value="C">C Hostel</option>
+                <option value="D">D Hostel</option>
+                <option value="E">E Hostel</option>
+                <option value="F">F Hostel</option>
+                <option value="G">G Hostel</option>
+                <option value="PG1">PG1 Hostel</option>
+                <option value="PG2">PG2 Hostel</option>
             </b-select>
         </b-field>
         <b-field label="Room number">
-            <b-input v-model="room" placeholder="Enter your Room number.h"></b-input>
+            <b-input v-model="room" type="number" placeholder="Enter your Room number">
+            </b-input>
+        </b-field>
         </b-field>
 
         <b-field label="Email">
             <b-input v-model="email" disabled></b-input>
         </b-field>
-         <b-field label="Whatsapp number">
-            <b-input v-model="phone" placeholder="Enter your WhatsApp number.h"></b-input>
+         <b-field label="Contact number">
+            <b-input v-model="phone" type="number" placeholder="Enter your WhatsApp number.h">
+            </b-input>
         </b-field>
-        <input type="submit" class="button" value="Register" />
+        <b-field class="has-text-centered">
+          <b-button tag="input" native-type="submit" type="is-primary">Save</b-button>
+        </b-field>
       </form>
     </div>
     </div>
   </section>
 </template>
-
+<style>
+.profile-img {
+  display:block;
+  width:150px;
+  border-radius: 100%;
+  margin:auto;
+}
+</style>
 <script>
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -95,11 +116,11 @@ export default {
       .then(snapshot => snapshot.val())
       .then((data) => {
         this.name = data && data.name ? data.name : user.displayName;
-        this.college = data && data.college ? data.college : '';
+        this.hostel = data && data.hostel ? data.hostel : '';
         this.phone = data && data.phone ? data.phone : user.phoneNumber;
         this.year = data && data.year ? data.year : '';
         this.branch = data && data.branch ? data.branch : '';
-        this.experience = data && data.experience ? data.experience : '';
+        this.room = data && data.room ? data.room : '';
       });
   },
 };

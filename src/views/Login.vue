@@ -1,16 +1,24 @@
 <template>
-  <section class="hero is-success is-fullheight-with-navbar">
+  <section class="hero is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
                     <div class="box">
-                        <figure class="avatar">
-                            <img src="https://placehold.it/128x128">
-                        </figure>
-                            <button @click="socialLogin"
-                             class="button is-block is-info is-large is-fullwidth">
+                      <div>
+                        <b-icon
+                            pack="fas"
+                            icon="tshirt"
+                            size="is-large">
+                        </b-icon>
+                        <br><br>
+                      </div>
+                            <b-button @click="socialLogin"
+                            icon-left="google"
+                            size="is-large"
+                            type="is-info"
+                            expanded>
                               Login with Google
-                            </button>
+                            </b-button>
                     </div>
                     <p class="has-text-grey">
                         <a href="../">Need Help?</a>
