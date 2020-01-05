@@ -162,7 +162,7 @@ export default {
   },
   firebase() {
     return {
-      user: firebase.database().ref(`ambassadors/${this.$route.params.user}`),
+      user: firebase.database().ref(`users/${this.$route.params.user}`),
       order: firebase.database().ref(`orders/${this.$route.params.user}/${this.$route.params.order}`),
     };
   },

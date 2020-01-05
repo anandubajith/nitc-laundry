@@ -3,33 +3,31 @@
     <div class="container">
       <div class="columns profile is-multiline">
         <div class="column is-narrow-tablet">
-          <img :src="photo" style="width:200px;border-radius:100%" alt="Profile Photo">
+          <img :src="photo" class="photo" alt="Profile Photo" />
         </div>
-        <div class="column  is-vertical-center">
+        <div class="column is-vertical-center">
           <div class="profile-block">
             <h4 class="is-size-3">{{ userData.name }}</h4>
             <h4 class="is-size-4">{{ userData.phone }}</h4>
             <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
-            <p> {{ userData.roll }} </p>
+            <p>{{ userData.roll }}</p>
             <p style="margin-top:10px">
-              <b-button tag="router-link" to="/register">
-                Edit Info
-              </b-button>
+              <b-button tag="router-link" to="/register">Edit Info</b-button>
             </p>
           </div>
         </div>
       </div>
-      <hr>
+      <hr />
       <div class="has-text-centered">
-         <b-button tag="router-link"
-                to="/order/new"
-                icon-left="cart"
-                size="is-large"
-                type="is-link">
-                Place Order
-            </b-button>
+        <b-button
+          tag="router-link"
+          to="/order/new"
+          icon-left="cart"
+          size="is-large"
+          type="is-link"
+        >Place Order</b-button>
       </div>
-      <hr>
+      <hr />
       <div>
         <h4 class="is-size-4 title">Past Orders</h4>
         <div class="orders" v-if="orders.length">
@@ -43,12 +41,19 @@
   </section>
 </template>
 <style>
-@media screen and (max-width:600px) {
+.photo {
+  width: 200px;
+  border-radius: 100%;
+}
+@media screen and (max-width: 600px) {
   .profile {
-    text-align:center
+    text-align: center;
   }
   .profile-block {
-    margin:auto;
+    margin: auto;
+  }
+  .photo {
+    width: 120px;
   }
 }
 </style>
@@ -77,8 +82,12 @@ export default {
   firebase() {
     const userId = firebase.auth().currentUser.uid;
     return {
-      userData: firebase.database().ref(`ambassadors/${userId}`),
-      orders: firebase.database().ref(`orders/${userId}`).orderByChild('createdAt').limitToLast(10),
+      userData: firebase.database().ref(`users/${userId}`),
+      orders: firebase
+        .database()
+        .ref(`orders/${userId}`)
+        .orderByChild('createdAt')
+        .limitToLast(10),
     };
   },
   beforeUpdate() {
@@ -87,9 +96,7 @@ export default {
       this.$router.push('/register');
     }
   },
-  computed: {
-  },
-  methods: {
-  },
+  computed: {},
+  methods: {},
 };
 </script>

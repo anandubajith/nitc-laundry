@@ -1,6 +1,6 @@
 {
   "rules": {
-    "ambassadors": {
+    "users": {
       ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1')",
       ".write": "auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1'",
       "$uid": {

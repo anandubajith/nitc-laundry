@@ -9,7 +9,7 @@
         <b-field label="Name">
             <b-input v-model="name" placeholder="Enter your name"></b-input>
         </b-field>
-        <b-field name="RollNumber">
+        <b-field label="Roll Number">
             <b-input v-model="roll" placeholder="Enter your Roll Number"></b-input>
         </b-field>
         <b-field grouped>
@@ -37,7 +37,7 @@
             <b-input v-model="email" disabled></b-input>
         </b-field>
          <b-field label="Contact number">
-            <b-input v-model="phone" type="number" placeholder="Enter your WhatsApp number.h">
+            <b-input v-model="phone" type="number" placeholder="Enter your Contact number">
             </b-input>
         </b-field>
         <b-field class="has-text-centered">
@@ -79,7 +79,7 @@ export default {
     addCA() {
       firebase
         .database()
-        .ref(`ambassadors/${firebase.auth().currentUser.uid}`)
+        .ref(`users/${firebase.auth().currentUser.uid}`)
         .update({
           name: this.name,
           hostel: this.hostel,
@@ -97,9 +97,12 @@ export default {
   },
   beforeCreate() {
     const user = firebase.auth().currentUser;
+    if (user.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') {
+      this.$router.push('/admin/dashboard');
+    }
     firebase
       .database()
-      .ref(`/ambassadors/${user.uid}`)
+      .ref(`/users/${user.uid}`)
       .once('value')
       .then(snapshot => snapshot.val())
       .then((data) => {
