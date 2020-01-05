@@ -1,7 +1,8 @@
 <template>
     <section class="section">
         <div class="container">
-
+          <!-- Order Search Page -->
+          <!-- Group orders -->
           <!-- Let them go to specific orderpage for actions -->
           <!-- List all users here  here -->
             <!-- {{ orders }} -->
