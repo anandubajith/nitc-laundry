@@ -87,8 +87,8 @@ export default {
         .ref(`orders/${firebase.auth().currentUser.uid}`)
         .push({
           id: Math.floor(Math.random() * 1000),
-          createdAt: Date.now(),
-          updatedAt: Date.now(),
+          createdAt: firebase.database.ServerValue.TIMESTAMP,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
           items: this.items,
           status: 'Pending',
         })

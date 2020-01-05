@@ -12,6 +12,7 @@
             <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
             <p>{{ userData.roll }}</p>
             <p style="margin-top:10px">
+              <b-button @click="enableNotifications">Enable Notifications</b-button>
               <b-button tag="router-link" to="/register">Edit Info</b-button>
             </p>
           </div>
@@ -61,6 +62,7 @@
 import firebase from 'firebase/app';
 import 'firebase/database';
 import 'firebase/auth';
+import 'firebase/messaging';
 import Order from '../components/Order.vue';
 
 export default {
@@ -97,6 +99,21 @@ export default {
     }
   },
   computed: {},
-  methods: {},
+  methods: {
+    enableNotifications() {
+      Notification.requestPermission()
+        .then((permission) => {
+          if (permission === 'granted') {
+            this.$buefy.toast.open('Notification permission granted.');
+            return firebase.messaging().getToken();
+          }
+          this.$buefy.toast.open('Unable to get permission to notify.');
+          return null;
+        })
+        .then(token => firebase.database()
+          .ref(`users/${this.uid}`)
+          .update({ token }));
+    },
+  },
 };
 </script>

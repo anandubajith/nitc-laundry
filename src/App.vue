@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       currentUser: firebase.auth().currentUser || null,
-      path: firebase.auth().currentUser.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1' ? '/admin/dashboard' : '/',
+      path: (firebase.auth().currentUser && firebase.auth().currentUser.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') ? '/admin/dashboard' : '/',
     };
   },
   methods: {

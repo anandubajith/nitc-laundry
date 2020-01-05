@@ -166,7 +166,7 @@ export default {
       order: firebase.database().ref(`orders/${this.$route.params.user}/${this.$route.params.order}`),
     };
   },
-  beforeUpdate() {
+  beforeCreate() {
     this.status = this.order.status;
     this.deliveryDate = this.order.deliveryDate;
   },
@@ -176,7 +176,7 @@ export default {
         .ref(`orders/${this.$route.params.user}/${this.$route.params.order}`)
         .update({
           status: this.status,
-          updatedAt: Date.now(),
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
         })
         .then(() => {
           this.$buefy.toast.open({
@@ -190,7 +190,7 @@ export default {
         .ref(`orders/${this.$route.params.user}/${this.$route.params.order}`)
         .update({
           deliveryDate: this.deliveryDate,
-          updatedAt: Date.now(),
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
         })
         .then(() => {
           this.$buefy.toast.open({

@@ -2,7 +2,7 @@
 import Vue from 'vue';
 import firebase from 'firebase/app';
 import 'firebase/auth';
-
+import 'firebase/messaging';
 import Buefy from 'buefy';
 // import 'firebase/analytics';
 import { rtdbPlugin } from 'vuefire';
@@ -10,6 +10,7 @@ import 'buefy/dist/buefy.css';
 
 import App from './App.vue';
 import router from './router';
+
 
 Vue.config.productionTip = false;
 
@@ -37,4 +38,8 @@ firebase.auth().onAuthStateChanged(() => {
       render: h => h(App),
     }).$mount('#app');
   }
+});
+
+firebase.messaging().onMessage((payload) => {
+  app.$buefy.toast.open(`<b>${payload.notification.title}</b>: ${payload.notification.body}`);
 });
