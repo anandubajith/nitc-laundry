@@ -21,9 +21,10 @@
             </div>
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <div class="box">
+                    <form class="box" v-on:submit.prevent="addItem">
 
-                             <b-field>
+                           <b-field grouped>
+                               <b-field expanded>
                             <b-select
                                 placeholder="Garment Type"
                                 required
@@ -34,18 +35,18 @@
                             </b-select>
                         </b-field>
                          <b-field>
-                         <b-input placeholder="Quantity"
-                         v-model="quantity"
-                            type="number"
-                            >
-                        </b-input>
+                         <b-numberinput min="1" v-model="quantity"
+                          controls-position="compact" placeholder="Quantity" max="100">
+                        </b-numberinput>
+
                     </b-field>
+                           </b-field>
                     <b-field>
-                            <b-button type="is-primary" @click="addItem">Add</b-button>
-
+                            <b-button tag="input" native-type="submit" type="is-primary">
+                              Add</b-button>
                     </b-field>
 
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="columns is-centered">
@@ -68,8 +69,8 @@ export default {
   data() {
     return {
       items: [],
-      type: '',
-      quantity: '',
+      type: null,
+      quantity: 1,
     };
   },
   methods: {
@@ -77,8 +78,8 @@ export default {
       this.items.push(
         { type: this.type, quantity: this.quantity },
       );
-      this.type = '';
-      this.quantity = '';
+      this.type = null;
+      this.quantity = 1;
     },
     placeOrder() {
       firebase
@@ -87,11 +88,12 @@ export default {
         .push({
           id: Math.floor(Math.random() * 1000),
           createdAt: Date.now(),
+          updatedAt: Date.now(),
           items: this.items,
           status: 'Pending',
         })
         .then(() => {
-          this.$buefy.toast.open('Order Placed');
+          this.$buefy.toast.open({ message: 'Order Placed', type: 'is-success' });
         })
         .then(() => {
           this.$router.replace('/home');

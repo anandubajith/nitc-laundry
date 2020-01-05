@@ -91,6 +91,7 @@ export default {
         })
         .then(() => {
           this.success = true;
+          this.$buefy.toast.open({ message: 'Details saved successfully', type: 'is-success' });
           this.$router.push('home');
         });
     },

@@ -177,6 +177,12 @@ export default {
         .update({
           status: this.status,
           updatedAt: Date.now(),
+        })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Updated',
+            type: 'is-success',
+          });
         });
     },
     setDeliveryDate() {
@@ -185,6 +191,12 @@ export default {
         .update({
           deliveryDate: this.deliveryDate,
           updatedAt: Date.now(),
+        })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Updated',
+            type: 'is-success',
+          });
         });
     },
   },
