@@ -88,7 +88,7 @@ export default {
           id: Math.floor(Math.random() * 1000),
           createdAt: Date.now(),
           items: this.items,
-          status: 'pending',
+          status: 'Pending',
         })
         .then(() => {
           this.$buefy.toast.open('Order Placed');

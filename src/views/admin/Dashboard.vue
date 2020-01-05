@@ -7,13 +7,10 @@
             <!-- {{ orders }} -->
             <ul>
               <li v-for="(order,key) in orders" :key="key">
-                <a :href="'/admin/order/'+order['.key']">
-                  <!-- {{ order }} -->
-                </a>
                 <div v-for="(o,k) in order" :key="k">
-                  <a :href="'/admin/order/'+order['.key'] + '/' + k">
-                    OrderID: {{ o.createdAt }}
-                  </a>
+                  <router-link :to="'/admin/order/'+order['.key'] + '/' + k">
+                    OrderID: {{ o.createdAt.toString().substr(1,9) }}
+                  </router-link>
                 </div>
               </li>
             </ul>

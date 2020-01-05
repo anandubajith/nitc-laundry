@@ -9,18 +9,8 @@
         <b-field label="Name">
             <b-input v-model="name" placeholder="Enter your name"></b-input>
         </b-field>
-        <b-field grouped>
-            <b-field label="Year" expanded>
-            <b-select placeholder="Select Year" v-model="year" required expanded>
-                <option value="First">First</option>
-                <option value="Second">Second</option>
-            <option value="Third">Third</option>
-            <option value="Fourth">Fourth</option>
-            </b-select>
-        </b-field>
-        <b-field label="Branch" expanded>
-            <b-input v-model="branch" placeholder="Enter your Branch"></b-input>
-        </b-field>
+        <b-field name="RollNumber">
+            <b-input v-model="roll" placeholder="Enter your Roll Number"></b-input>
         </b-field>
         <b-field grouped>
 <b-field label="Hostel" expanded>
@@ -78,8 +68,7 @@ export default {
       name: firebase.auth().currentUser.displayName,
       room: '',
       phone: '',
-      year: '',
-      branch: '',
+      roll: '',
       hostel: '',
       photo: firebase.auth().currentUser.photoURL,
       email: firebase.auth().currentUser.email,
@@ -96,8 +85,7 @@ export default {
           hostel: this.hostel,
           phone: this.phone,
           email: this.email,
-          year: this.year,
-          branch: this.branch,
+          roll: this.roll,
           room: this.room,
           photo: this.photo,
         })
@@ -118,8 +106,7 @@ export default {
         this.name = data && data.name ? data.name : user.displayName;
         this.hostel = data && data.hostel ? data.hostel : '';
         this.phone = data && data.phone ? data.phone : user.phoneNumber;
-        this.year = data && data.year ? data.year : '';
-        this.branch = data && data.branch ? data.branch : '';
+        this.roll = data && data.roll ? data.roll : '';
         this.room = data && data.room ? data.room : '';
       });
   },

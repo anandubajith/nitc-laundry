@@ -17,19 +17,24 @@
           <br />
           <b>{{ user.room }}</b>
           {{ user.hostel }}
-          {{user.year + " year"}}
+          {{user.roll }}
         </p>
-      </div>
-      <div class="column is-quarter-tablet is-full-mobile is-quarter-desktop has-text-centered">
-        <!-- <p class="stat-val">{{ totalPoints }}</p> -->
-        <p class="stat-key">Points</p>
       </div>
     </div>
             <hr>
             <div class="box">
-              <h4 class="is-size-4">
-                CreatedAt: <b>{{ (new Date(order.createdAt)).toLocaleString() }}</b>
-              </h4>
+              <div class="columns has-text-centered">
+                <div class="column">
+                  <h4 class="is-size-4">
+                    CreatedAt: <b>{{ (new Date(order.createdAt)).toLocaleString() }}</b>
+                  </h4>
+                </div>
+                <div class="column">
+                  <h4 class="is-size-4">
+                    UpdatedAt: <b>{{ (new Date(order.updatedAt)).toLocaleString() }}</b>
+                  </h4>
+                </div>
+              </div>
             </div>
             <div class="box">
               <h4 class="is-size-4">Items</h4>
@@ -42,9 +47,36 @@
             </div>
             <hr>
             <div class="box">
-              <h4 class="is-size-5">Update Status</h4>
-              <hr>
-                <b-field>
+              <div class="columns">
+                <div class="column is-vertical-center">
+                  Select Delivery Date
+                </div>
+                <div class="column">
+                  <b-field grouped>
+                    <b-field expanded>
+                      <b-datetimepicker
+                    placeholder="Click to select..."
+                    v-model="deliveryDate"
+                    expanded
+                    icon="calendar-today">
+                </b-datetimepicker>
+                    </b-field>
+                    <b-field>
+                      <b-button type="is-primary" @click="setDeliveryDate">
+                        Set Delivery Date</b-button>
+                    </b-field>
+                  </b-field>
+                </div>
+              </div>
+            </div>
+            <div class="box">
+               <div class="columns">
+                 <div class="column is-vertical-center">
+                   <h4 class="is-size-5">Update Status</h4>
+                 </div>
+                 <div class="column">
+                   <b-field grouped>
+                    <b-field expanded>
                             <b-select
                                 placeholder="Select current Status"
                                 required
@@ -59,7 +91,9 @@
                     <b-field>
                       <b-button type="is-primary" @click="updateStatus">Update Status</b-button>
                     </b-field>
-
+                    </b-field>
+                 </div>
+               </div>
             </div>
         </div>
     </section>
@@ -123,6 +157,7 @@ export default {
       user: {},
       order: {},
       status: '',
+      deliveryDate: null,
     };
   },
   firebase() {
@@ -131,12 +166,25 @@ export default {
       order: firebase.database().ref(`orders/${this.$route.params.user}/${this.$route.params.order}`),
     };
   },
+  beforeUpdate() {
+    this.status = this.order.status;
+    this.deliveryDate = this.order.deliveryDate;
+  },
   methods: {
     updateStatus() {
       firebase.database()
         .ref(`orders/${this.$route.params.user}/${this.$route.params.order}`)
         .update({
           status: this.status,
+          updatedAt: Date.now(),
+        });
+    },
+    setDeliveryDate() {
+      firebase.database()
+        .ref(`orders/${this.$route.params.user}/${this.$route.params.order}`)
+        .update({
+          deliveryDate: this.deliveryDate,
+          updatedAt: Date.now(),
         });
     },
   },

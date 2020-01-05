@@ -2,7 +2,7 @@
   <div id="app">
      <b-navbar type="is-light" :fixed-top="true">
         <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
+            <b-navbar-item tag="router-link" :to="{ path }">
                    <b-icon
                       icon="tshirt-v">
                   </b-icon>
@@ -13,7 +13,7 @@
             <b-navbar-item href="#">
                 How it works
             </b-navbar-item>
-            <b-navbar-item href="/about">
+            <b-navbar-item tag="router-link" :to="{ path: '/about' }">
               About
             </b-navbar-item>
         </template>
@@ -52,7 +52,8 @@ export default {
   name: 'App',
   data() {
     return {
-      currentUser: firebase.auth().currentUser,
+      currentUser: firebase.auth().currentUser || null,
+      path: firebase.auth().currentUser.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1' ? '/admin/dashboard' : '/',
     };
   },
   methods: {

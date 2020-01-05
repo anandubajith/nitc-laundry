@@ -10,7 +10,7 @@
             <h4 class="is-size-3">{{ userData.name }}</h4>
             <h4 class="is-size-4">{{ userData.phone }}</h4>
             <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
-            <p> {{ userData.branch }} {{ userData.year +' year'}} </p>
+            <p> {{ userData.roll }} </p>
             <p style="margin-top:10px">
               <b-button tag="router-link" to="/register">
                 Edit Info
@@ -32,8 +32,11 @@
       <hr>
       <div>
         <h4 class="is-size-4 title">Past Orders</h4>
-        <div class="orders">
+        <div class="orders" v-if="orders.length">
           <Order v-for="(order, key) in orders" :order="order" :key="key" />
+        </div>
+        <div v-else>
+          <h4 class="is-size-4">Place an Order to get started</h4>
         </div>
       </div>
     </div>
@@ -63,19 +66,7 @@ export default {
       photo: firebase.auth().currentUser.photoURL,
       uid: firebase.auth().currentUser.uid,
       success: false,
-      position: 0,
       userData: {},
-      notification: {},
-      leaderboard: [],
-      tasks: {},
-      selectedTask: '',
-      data: [
-        'Shirt',
-        'Pants',
-        'A',
-        'Other',
-
-      ],
       name: '',
       count: 0,
     };
@@ -97,32 +88,8 @@ export default {
     }
   },
   computed: {
-    filteredDataArray() {
-      return this.data.filter(option => option
-        .toString()
-        .toLowerCase()
-        .indexOf(this.name.toLowerCase()) >= 0);
-    },
-
-  },
-  watch: {
-    leaderboard(current) {
-      if (current.length) {
-        for (let i = 0; i < current.length; i += 1) {
-          if (current[i].id === this.uid) {
-            this.position = i + 1;
-            return;
-          }
-        }
-      }
-      this.position = 0;
-    },
   },
   methods: {
-    onCopy() {
-      // eslint-disable-next-line
-      alert('Referral Code copied');
-    },
   },
 };
 </script>

@@ -43,7 +43,6 @@ export default {
   },
   methods: {
     socialLogin() {
-      // console.log('hi there');
       const provider = new firebase.auth.GoogleAuthProvider();
       firebase
         .auth()
@@ -53,7 +52,10 @@ export default {
         })
         .catch((err) => {
           // eslint-disable-next-line
-          alert(`Oops. ${err.message}`);
+          this.$buefy.toast.open({
+            message: `Oops. ${err.message}`,
+            type: 'is-danger',
+          });
         });
     },
   },

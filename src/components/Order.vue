@@ -2,10 +2,10 @@
   <div class="order box">
       <div class="columns is-multiline">
           <div class="column is-vertical-center is-one-third">
-              <b>Order #{{ order.id }}</b>
+              <b>Order #{{ order.createdAt.toString().substr(1,9) }}</b>
           </div>
           <div class="column is-vertical-center is-one-third">
-             {{ (new Date(order.createdAt)).toLocaleString() }}
+             {{ (new Date(order.updatedAt)).toLocaleString() }}
              -
              <b>{{ order.status }}</b>
           </div>
@@ -24,7 +24,12 @@
                 </ul>
           </div>
           <div class="column is-half is-vertical-center">
-            Total Cost: ₹ ??
+          <div>
+            <p>Total Cost: ₹ ??
+              <br>
+              Delivery Date ( estimated ): <b>{{ order.deliveryDate || ''}}</b>
+            </p>
+          </div>
           </div>
       </div>
   </div>
