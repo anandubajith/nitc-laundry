@@ -75,7 +75,7 @@ export default {
       success: false,
       userData: {},
       name: '',
-      count: 0,
+      notificationsActive: true,
     };
   },
   components: {
@@ -104,15 +104,23 @@ export default {
       Notification.requestPermission()
         .then((permission) => {
           if (permission === 'granted') {
-            this.$buefy.toast.open('Notification permission granted.');
             return firebase.messaging().getToken();
           }
-          this.$buefy.toast.open('Unable to get permission to notify.');
           return null;
         })
-        .then(token => firebase.database()
-          .ref(`users/${this.uid}`)
-          .update({ token }));
+        .then(token => this.storeToken(token));
+    },
+    storeToken(token) {
+      if (token === null) {
+        this.$buefy.toast.open('Unable to get permission to notify.');
+        return;
+      }
+      firebase.database()
+        .ref(`users/${this.uid}`)
+        .update({ token })
+        .then(() => {
+          this.$buefy.toast.open('Notifications active');
+        });
     },
   },
 };
