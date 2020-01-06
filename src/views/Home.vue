@@ -11,9 +11,14 @@
             <h4 class="is-size-4">{{ userData.phone }}</h4>
             <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
             <p>{{ userData.roll }}</p>
-            <p style="margin-top:10px">
-              <b-button @click="enableNotifications">Enable Notifications</b-button>
-              <b-button tag="router-link" to="/register">Edit Info</b-button>
+            <p style="margin-top:10px" class="buttons">
+              <b-button :icon-right="notificationsActive ? 'check':'window-close'"
+                        :type="notificationsActive ? 'is-success': 'is-danger'"
+                        @click="enableNotifications"
+              >
+                Notifications
+              </b-button>
+              <b-button tag="router-link" type="is-info" to="/register">Edit Info</b-button>
             </p>
           </div>
         </div>
@@ -75,7 +80,7 @@ export default {
       success: false,
       userData: {},
       name: '',
-      notificationsActive: true,
+      notificationsActive: Notification.permission === 'granted',
     };
   },
   components: {
@@ -92,6 +97,16 @@ export default {
         .limitToLast(10),
     };
   },
+  beforeMount() {
+    firebase.messaging().onTokenRefresh(() => {
+      firebase.messaging().getToken().then((refreshedToken) => {
+        this.storeToken(refreshedToken);
+        this.$buefy.toast.open('Token refreshed');
+      }).catch(() => {
+        this.$buefy.toast.open('Unable to retrieve refreshed token ');
+      });
+    });
+  },
   beforeUpdate() {
     if (Object.entries(this.userData).length < 4) {
       // This user is unregistered, prompt them to register
@@ -106,6 +121,7 @@ export default {
           if (permission === 'granted') {
             return firebase.messaging().getToken();
           }
+          this.notificationsActive = false;
           return null;
         })
         .then(token => this.storeToken(token));
@@ -124,4 +140,5 @@ export default {
     },
   },
 };
+
 </script>

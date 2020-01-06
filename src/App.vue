@@ -4,7 +4,7 @@
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ path }">
                    <b-icon
-                      icon="tshirt-v">
+                      icon="cup-water">
                   </b-icon>
                 <h1 class="is-size-4"> Laundry</h1>
             </b-navbar-item>

@@ -15,6 +15,7 @@
         ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)",
         ".write": "($uid === auth.uid) && !data.exists()",
         "$pushID": {
+          ".indexOn": "createdAt",
           ".write": "!data.exists()"
         }
       }

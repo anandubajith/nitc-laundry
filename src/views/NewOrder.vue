@@ -14,7 +14,7 @@
                         </div>
                         <hr>
                         <div>
-                            Total cost: ₹ ??
+                            Total cost: <b>₹{{totalCost}}</b>
                         </div>
                     </div>
                 </div>
@@ -71,6 +71,7 @@ export default {
       items: [],
       type: null,
       quantity: 1,
+      totalCost: 0,
     };
   },
   methods: {
@@ -86,7 +87,6 @@ export default {
         .database()
         .ref(`orders/${firebase.auth().currentUser.uid}`)
         .push({
-          id: Math.floor(Math.random() * 1000),
           createdAt: firebase.database.ServerValue.TIMESTAMP,
           updatedAt: firebase.database.ServerValue.TIMESTAMP,
           items: this.items,

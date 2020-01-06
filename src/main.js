@@ -41,5 +41,5 @@ firebase.auth().onAuthStateChanged(() => {
 });
 
 firebase.messaging().onMessage((payload) => {
-  app.$buefy.toast.open(`<b>${payload.notification.title}</b>: ${payload.notification.body}`);
+  app.$buefy.toast.open(`<b>${payload.notification.title}</b><br> ${payload.notification.body}`);
 });

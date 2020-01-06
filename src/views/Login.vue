@@ -6,8 +6,7 @@
                     <div class="box">
                       <div>
                         <b-icon
-                            pack="fas"
-                            icon="tshirt"
+                            icon="cup-water"
                             size="is-large">
                         </b-icon>
                         <br><br>

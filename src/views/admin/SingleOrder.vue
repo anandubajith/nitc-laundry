@@ -167,8 +167,9 @@ export default {
     };
   },
   beforeCreate() {
-    this.status = this.order.status;
-    this.deliveryDate = this.order.deliveryDate;
+    // TODO: Fix this
+    // this.status = this.order.status;
+    // this.deliveryDate = this.order.deliveryDate;
   },
   methods: {
     updateStatus() {
