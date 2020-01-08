@@ -25,31 +25,53 @@
             <div class="box">
               <div class="columns has-text-centered">
                 <div class="column">
-                  <h4 class="is-size-4">
+                  <h4 class="is-size-5">
                     CreatedAt: <b>{{ (new Date(order.createdAt)).toLocaleString() }}</b>
                   </h4>
                 </div>
                 <div class="column">
-                  <h4 class="is-size-4">
+                  <h4 class="is-size-5">
                     UpdatedAt: <b>{{ (new Date(order.updatedAt)).toLocaleString() }}</b>
                   </h4>
                 </div>
+     <div class="column">
+                  <h4 class="is-size-5">
+                    DeliveryDate: <b>{{ (new Date(order.deliveryDate)).toLocaleString() }}</b>
+                  </h4>
+                </div>
+              </div>
+              <div class="columns has-text-centered">
+                 <div class="column ">
+                <h4 class="is-size-5">
+                  TotalCost: <b>₹{{ order.totalCost }}</b>
+                </h4>
+              </div>
+              <div class="column">
+                <h4 class="is-size-5">
+                  Status: <b>{{ order.status }}</b>
+                </h4>
+              </div>
               </div>
             </div>
             <div class="box">
-              <h4 class="is-size-4">Items</h4>
+              <h4 class="is-size-4 title">Items</h4>
               <hr>
               <div v-for="(item,key) in order.items" :key="key">
                   {{ item.type }} x {{ item.quantity }}
               </div>
-              <hr>
-              <h4 class="is-size-5">Total Cost: ??</h4>
+            </div>
+            <div class="box" v-if="order && order.remarks">
+              <h4 class="title is-size-4">
+                Remarks
+              </h4>
+              {{ order.remarks }}
             </div>
             <hr>
+
             <div class="box">
               <div class="columns">
                 <div class="column is-vertical-center">
-                  Select Delivery Date
+                  <h4 class="is-size-5">Select Delivery Date</h4>
                 </div>
                 <div class="column">
                   <b-field grouped>
@@ -95,6 +117,28 @@
                  </div>
                </div>
             </div>
+            <div class="box">
+               <div class="columns">
+                 <div class="column is-vertical-center">
+                   <h4 class="is-size-5">Update totalCost</h4>
+                 </div>
+                 <div class="column">
+                   <b-field grouped>
+                      <b-field expanded>
+                        <b-input placeholder="New Total Cost"
+                          v-model="newTotal"
+                            type="number">
+                        </b-input>
+                    </b-field>
+                    <b-field>
+                      <b-button type="is-primary" @click="updateTotal">
+                        Update Total
+                      </b-button>
+                    </b-field>
+                   </b-field>
+                 </div>
+                </div>
+              </div>
         </div>
     </section>
 </template>
@@ -158,6 +202,7 @@ export default {
       order: {},
       status: '',
       deliveryDate: null,
+      newTotal: null,
     };
   },
   firebase() {
@@ -184,6 +229,23 @@ export default {
             message: 'Updated',
             type: 'is-success',
           });
+        });
+    },
+    updateTotal() {
+      firebase.database()
+        .ref(`orders/${this.$route.params.user}/${this.$route.params.order}`)
+        .update({
+          totalCost: this.newTotal,
+          updatedAt: firebase.database.ServerValue.TIMESTAMP,
+        })
+        .then(() => {
+          this.$buefy.toast.open({
+            message: 'Updated',
+            type: 'is-success',
+          });
+        })
+        .then(() => {
+          this.newTotal = null;
         });
     },
     setDeliveryDate() {

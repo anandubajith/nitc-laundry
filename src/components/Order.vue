@@ -25,9 +25,12 @@
           </div>
           <div class="column is-half is-vertical-center">
           <div>
-            <p>Total Cost: ₹ ??
+            <p>Total Cost: <b>₹{{ order.totalCost || 0 }}</b>
               <br>
-              Delivery Date ( estimated ): <b>{{ order.deliveryDate || ''}}</b>
+              Delivery Date<b-tooltip type="is-dark" label="Estimated">
+                    <b-icon size="is-small" icon="help-circle-outline"></b-icon>
+                </b-tooltip>:
+                <b>{{ (new Date(order.deliveryDate)).toLocaleString() || ''}}</b>
             </p>
           </div>
           </div>

@@ -6,7 +6,7 @@
                    <b-icon
                       icon="cup-water">
                   </b-icon>
-                <h1 class="is-size-4"> Laundry</h1>
+                <h1 class="is-size-4"> eLaundry</h1>
             </b-navbar-item>
         </template>
         <template slot="start">
