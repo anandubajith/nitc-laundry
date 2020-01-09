@@ -80,7 +80,7 @@ export default {
       success: false,
       userData: {},
       name: '',
-      notificationsActive: Notification.permission === 'granted',
+      notificationsActive: firebase.messaging.isSupported && Notification.permission === 'granted',
     };
   },
   components: {
@@ -98,14 +98,16 @@ export default {
     };
   },
   beforeMount() {
-    firebase.messaging().onTokenRefresh(() => {
-      firebase.messaging().getToken().then((refreshedToken) => {
-        this.storeToken(refreshedToken);
-        this.$buefy.toast.open('Token refreshed');
-      }).catch(() => {
-        this.$buefy.toast.open('Unable to retrieve refreshed token ');
+    if (firebase.messaging.isSupported) {
+      firebase.messaging().onTokenRefresh(() => {
+        firebase.messaging().getToken().then((refreshedToken) => {
+          this.storeToken(refreshedToken);
+          this.$buefy.toast.open('Token refreshed');
+        }).catch(() => {
+          this.$buefy.toast.open('Unable to retrieve refreshed token ');
+        });
       });
-    });
+    }
   },
   beforeUpdate() {
     if (Object.entries(this.userData).length < 4) {
@@ -116,15 +118,22 @@ export default {
   computed: {},
   methods: {
     enableNotifications() {
-      Notification.requestPermission()
-        .then((permission) => {
-          if (permission === 'granted') {
-            return firebase.messaging().getToken();
-          }
-          this.notificationsActive = false;
-          return null;
-        })
-        .then(token => this.storeToken(token));
+      if (firebase.messaging.isSupported) {
+        Notification.requestPermission()
+          .then((permission) => {
+            if (permission === 'granted') {
+              return firebase.messaging().getToken();
+            }
+            this.notificationsActive = false;
+            return null;
+          })
+          .then(token => this.storeToken(token));
+      } else {
+        this.$buefy.toast.open({
+          message: 'Notifications are not supported in this browser',
+          type: 'is-danger',
+        });
+      }
     },
     storeToken(token) {
       if (token === null) {

@@ -8,22 +8,7 @@
             :animated="true"
             :has-navigation="false">
             <b-step-item label="Add Items" >
-                  <div class="box">
-                        <h3 class="is-size-4">Items in Order</h3>
-                        <hr>
-                        <div class="item" v-for="(item,key) in items" :key="key">
-                            {{ item.type }} - ( ₹{{ costModel[item.type]}} x {{ item.quantity }} )
-                        </div>
-                        <div v-if="items.length == 0">
-                            No Items in order
-                        </div>
-                        <hr>
-                        <div>
-                            Total cost: <b>₹{{totalCost}}</b>
-                        </div>
-                    </div>
-                      <form class="box" v-on:submit.prevent="addItem">
-
+              <form class="box" v-on:submit.prevent="addItem">
                            <b-field grouped>
                                <b-field expanded>
                             <b-select
@@ -54,6 +39,21 @@
                     </b-field>
 
                     </form>
+                  <div class="box">
+
+                        <h3 class="is-size-4">Items in Order</h3>
+                        <hr>
+                        <div class="item" v-for="(item,key) in items" :key="key">
+                            {{ item.type }} - ( ₹{{ costModel[item.type]}} x {{ item.quantity }} )
+                        </div>
+                        <div v-if="items.length == 0">
+                            No Items in order
+                        </div>
+                        <hr>
+                        <div>
+                            Total cost: <b>₹{{totalCost}}</b>
+                        </div>
+                    </div>
                     <div class="box buttons has-text-centered">
                       <b-button type="is-primary"
                       @click="activeStep = 1"
@@ -93,7 +93,7 @@
                        </div>
                        <div class="columns">
                          <div class="column" style="font-weight:bold;">
-                           Note: *OneDay delivery costs ₹{{expressCost}} ( +25% of TotalCost)
+                           Note: *OneDay delivery costs +25% of Total
                          </div>
                        </div>
                     </div>
