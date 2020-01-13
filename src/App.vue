@@ -59,7 +59,7 @@ export default {
 // Import Bulma's core
 @import "~bulma/sass/utilities/_all";
 // Set your colors
-$primary: #00aba9;
+$primary: #1abc9c;
 $primary-invert: findColorInvert($primary);
 $google: #4285fa;
 $google-invert: findColorInvert($google);
