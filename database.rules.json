@@ -1,18 +1,18 @@
 {
   "rules": {
     "users": {
-      ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1')",
-      ".write": "auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1'",
+      ".read": "(auth.token.admin === true)",
+      ".write": "auth.token.admin === true",
       "$uid": {
-        ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)",
-        ".write": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)"
+        ".read": "(auth.token.admin === true) || ($uid === auth.uid)",
+        ".write": "(auth.token.admin === true) || ($uid === auth.uid)"
       }
     },
     "orders": {
-      ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1')",
-      ".write": "auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1'",
+      ".read": "(auth.token.admin === true)",
+      ".write": "auth.token.admin === true",
       "$uid": {
-        ".read": "(auth.uid === 'Qq7y53QqYJgb1wkoqWHyAPPkBOg1') || ($uid === auth.uid)",
+        ".read": "(auth.token.admin === true) || ($uid === auth.uid)",
         ".write": "($uid === auth.uid) && !data.exists()",
         "$pushID": {
           ".indexOn": "createdAt",
