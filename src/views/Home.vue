@@ -1,68 +1,69 @@
 <template>
-  <section class="section home">
-    <div class="container">
-      <div class="columns profile is-multiline">
-        <div class="column is-narrow-tablet">
-          <img :src="photo" class="photo" alt="Profile Photo" />
+    <section class="section home">
+        <div class="container">
+            <div class="columns profile is-multiline">
+                <div class="column is-narrow-tablet">
+                    <img :src="photo" class="photo" alt="Profile Photo" />
+                </div>
+                <div class="column is-vertical-center">
+                    <div class="profile-block">
+                        <h4 class="is-size-3">{{ userData.name }}</h4>
+                        <h4 class="is-size-4">{{ userData.phone }}</h4>
+                        <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
+                        <p>{{ userData.roll }}</p>
+                        <p style="margin-top:10px" class="buttons">
+                            <b-button :icon-right="notificationsActive ? 'check':'window-close'"
+                                    :type="notificationsActive ? 'is-success': 'is-danger'"
+                                    @click="enableNotifications">
+                                Notifications
+                            </b-button>
+                            <b-button tag="router-link" type="is-info" to="/register">
+                              Edit Info
+                            </b-button>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="has-text-centered">
+                <b-button tag="router-link" to="/order/new"
+                    icon-left="shopping-cart" size="is-large" type="is-link">
+                    Place Order
+                </b-button>
+            </div>
+            <hr />
+            <div>
+                <h4 class="is-size-4 title">Past Orders</h4>
+                <div class="orders" v-if="orders.length">
+                    <Order v-for="(order, key) in orders" :order="order" :key="key" />
+                </div>
+                <div v-else>
+                    <h4 class="is-size-4">Place an Order to get started</h4>
+                </div>
+            </div>
         </div>
-        <div class="column is-vertical-center">
-          <div class="profile-block">
-            <h4 class="is-size-3">{{ userData.name }}</h4>
-            <h4 class="is-size-4">{{ userData.phone }}</h4>
-            <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
-            <p>{{ userData.roll }}</p>
-            <p style="margin-top:10px" class="buttons">
-              <b-button :icon-right="notificationsActive ? 'check':'window-close'"
-                        :type="notificationsActive ? 'is-success': 'is-danger'"
-                        @click="enableNotifications"
-              >
-                Notifications
-              </b-button>
-              <b-button tag="router-link" type="is-info" to="/register">Edit Info</b-button>
-            </p>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div class="has-text-centered">
-        <b-button
-          tag="router-link"
-          to="/order/new"
-          icon-left="shopping-cart"
-          size="is-large"
-          type="is-link"
-        >Place Order</b-button>
-      </div>
-      <hr />
-      <div>
-        <h4 class="is-size-4 title">Past Orders</h4>
-        <div class="orders" v-if="orders.length">
-          <Order v-for="(order, key) in orders" :order="order" :key="key" />
-        </div>
-        <div v-else>
-          <h4 class="is-size-4">Place an Order to get started</h4>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </template>
+
 <style>
 .photo {
-  width: 200px;
-  border-radius: 100%;
+    width: 200px;
+    border-radius: 100%;
 }
+
 @media screen and (max-width: 600px) {
-  .profile {
-    text-align: center;
-  }
-  .profile-block {
-    margin: auto;
-  }
-  .photo {
-    width: 120px;
-  }
+    .profile {
+        text-align: center;
+    }
+    .profile-block {
+        margin: auto;
+    }
+    .photo {
+        width: 120px;
+    }
 }
 </style>
+
 <script>
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -149,5 +150,4 @@ export default {
     },
   },
 };
-
 </script>

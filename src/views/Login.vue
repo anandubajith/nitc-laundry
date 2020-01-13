@@ -1,52 +1,46 @@
 <template>
-  <section class="hero is-fullheight-with-navbar">
+    <section class="hero is-fullheight-with-navbar">
         <div class="hero-body">
             <div class="container has-text-centered">
                 <div class="column is-4 is-offset-4">
                     <div class="box">
-                      <div>
-                        <b-icon
-                            icon="water"
-                            size="is-large">
-                        </b-icon>
-                        <br><br>
-<table class="table is-bordered is-fullwidth">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Shirt</td>
-          <td>₹11</td>
-        </tr>
-        <tr>
-          <td>Jeans</td>
-          <td>₹12</td>
-        </tr>
-        <tr>
-          <td>Pants</td>
-          <td>₹10</td>
-        </tr>
-        <tr>
-          <td>TShirt</td>
-          <td>₹9</td>
-        </tr>
-      </tbody>
-    </table>
-    <p><i>Free delivery over ₹50</i></p>
-    <br>
-                      </div>
-                            <b-button @click="socialLogin"
-                            icon-left="google"
-                            icon-pack="fab"
-                            size="is-large"
-                            type="is-google"
-                            expanded>
-                              Login with Google
-                            </b-button>
+                        <div>
+                            <b-icon icon="water" size="is-large">
+                            </b-icon>
+                            <br><br>
+                            <table class="table is-bordered is-fullwidth">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Rate</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Shirt</td>
+                                        <td>₹11</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jeans</td>
+                                        <td>₹12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pants</td>
+                                        <td>₹10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TShirt</td>
+                                        <td>₹9</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p><i>Free delivery over ₹50</i></p>
+                            <br>
+                        </div>
+                        <b-button @click="socialLogin" icon-left="google"
+                                icon-pack="fab" size="is-large" type="is-google" expanded>
+                            Login with Google
+                        </b-button>
                     </div>
                 </div>
             </div>
@@ -77,7 +71,7 @@ export default {
         })
         .catch((err) => {
           // eslint-disable-next-line
-          this.$buefy.toast.open({
+                    this.$buefy.toast.open({
             message: `Oops. ${err.message}`,
             type: 'is-danger',
           });

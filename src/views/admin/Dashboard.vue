@@ -2,48 +2,49 @@
     <section class="section">
         <div class="container">
             <div class="box">
-              <h3 class="title is-size-3">Pending pickup</h3>
-              <div v-for="(order, i) in pendingOrders " :key="i">
-                <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
-                  OrderID: {{ order.createdAt.toString().substr(1,9) }}
-                </router-link>
-                CreatedAt: {{ (new Date(order.createdAt)).toLocaleString()}}
-                <br><br>
-              </div>
+                <h3 class="title is-size-3">Pending pickup</h3>
+                <div v-for="(order, i) in pendingOrders " :key="i">
+                    <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
+                        OrderID: {{ order.createdAt.toString().substr(1,9) }}
+                    </router-link>
+                    CreatedAt: {{ (new Date(order.createdAt)).toLocaleString()}}
+                    <br><br>
+                </div>
             </div>
             <div class="box">
-              <h3 class="title is-size-3">Pending Delivery</h3>
-              <div v-for="(order, i) in pendingDelivery " :key="i">
-                 <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
-                  OrderID: {{ order.createdAt.toString().substr(1,9) }}
-                 </router-link>
-                DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
-                <br><br>
-              </div>
+                <h3 class="title is-size-3">Pending Delivery</h3>
+                <div v-for="(order, i) in pendingDelivery " :key="i">
+                    <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
+                        OrderID: {{ order.createdAt.toString().substr(1,9) }}
+                    </router-link>
+                    DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
+                    <br><br>
+                </div>
             </div>
             <div class="box">
-              <h3 class="title is-size-3">Out for Delivery</h3>
-              <div v-for="(order, i) in pendingOutForDelivery " :key="i">
-                 <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
-                  OrderID: {{ order.createdAt.toString().substr(1,9) }}
-                 </router-link>
-                DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
-                <br><br>
-              </div>
+                <h3 class="title is-size-3">Out for Delivery</h3>
+                <div v-for="(order, i) in pendingOutForDelivery " :key="i">
+                    <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
+                        OrderID: {{ order.createdAt.toString().substr(1,9) }}
+                    </router-link>
+                    DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
+                    <br><br>
+                </div>
             </div>
             <div class="box">
-              <h3 class="title is-size-3">Delivered</h3>
-              <div v-for="(order, i) in deliveredOrders " :key="i">
-                 <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
-                  OrderID: {{ order.createdAt.toString().substr(1,9) }}
-                 </router-link>
-                DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
-                <br><br>
-              </div>
+                <h3 class="title is-size-3">Delivered</h3>
+                <div v-for="(order, i) in deliveredOrders " :key="i">
+                    <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
+                        OrderID: {{ order.createdAt.toString().substr(1,9) }}
+                    </router-link>
+                    DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
+                    <br><br>
+                </div>
             </div>
         </div>
     </section>
 </template>
+
 <script>
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -54,6 +55,7 @@ function compare(a, b) {
 
   return 0;
 }
+
 function compare2(a, b) {
   if (a.deliveryDate > b.deliveryDate) return 1;
   if (b.deliveryDate > a.deliveryDate) return -1;

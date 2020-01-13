@@ -1,63 +1,71 @@
 <template>
-  <section class="section">
-    <div class="container">
-    <div class="register" v-if="!success">
-      <h2 class="is-size-3">Please fill in your details</h2>
-      <hr>
-      <img :src="photo" class="profile-img">
-      <form v-on:submit.prevent="addCA" autocomplete="off">
-        <b-field label="Name">
-            <b-input v-model="name" placeholder="Enter your name" required></b-input>
-        </b-field>
-        <b-field label="Roll Number">
-            <b-input v-model="roll" placeholder="Enter your Roll Number" required></b-input>
-        </b-field>
-        <b-field grouped>
-<b-field label="Hostel" expanded>
-            <b-select placeholder="Select Hostel" v-model="hostel" expanded required>
-                <option value="MegaBoys">Mega Boys Hostel</option>
-                <option value="A">A Hostel</option>
-                <option value="B">B Hostel</option>
-                <option value="C">C Hostel</option>
-                <option value="D">D Hostel</option>
-                <option value="E">E Hostel</option>
-                <option value="F">F Hostel</option>
-                <option value="G">G Hostel</option>
-                <option value="PG1">PG1 Hostel</option>
-                <option value="PG2">PG2 Hostel</option>
-            </b-select>
-        </b-field>
-        <b-field label="Room number">
-            <b-input v-model="room" type="number" placeholder="Enter your Room number" required>
-            </b-input>
-        </b-field>
-        </b-field>
+    <section class="section">
+        <div class="container">
+            <div class="register" v-if="!success">
+                <h2 class="is-size-3">Please fill in your details</h2>
+                <hr>
+                <img :src="photo" class="profile-img">
+                <form v-on:submit.prevent="addCA" autocomplete="off">
+                    <b-field label="Name">
+                        <b-input v-model="name" placeholder="Enter your name"
+                                 required></b-input>
+                    </b-field>
+                    <b-field label="Roll Number">
+                        <b-input v-model="roll"
+                                 placeholder="Enter your Roll Number" required></b-input>
+                    </b-field>
+                    <b-field grouped>
+                        <b-field label="Hostel" expanded>
+                            <b-select placeholder="Select Hostel"
+                                      v-model="hostel" expanded required>
+                                <option value="MegaBoys">Mega Boys Hostel</option>
+                                <option value="A">A Hostel</option>
+                                <option value="B">B Hostel</option>
+                                <option value="C">C Hostel</option>
+                                <option value="D">D Hostel</option>
+                                <option value="E">E Hostel</option>
+                                <option value="F">F Hostel</option>
+                                <option value="G">G Hostel</option>
+                                <option value="PG1">PG1 Hostel</option>
+                                <option value="PG2">PG2 Hostel</option>
+                            </b-select>
+                        </b-field>
+                        <b-field label="Room number">
+                            <b-input v-model="room" type="number"
+                                     placeholder="Enter your Room number" required>
+                            </b-input>
+                        </b-field>
+                    </b-field>
 
-        <b-field label="Email">
-            <b-input v-model="email" disabled></b-input>
-        </b-field>
-         <b-field label="Contact number">
-            <b-input v-model="phone" type="number" placeholder="Enter your Contact number" required>
-            </b-input>
-        </b-field>
-        <b-field class="has-text-centered">
-          <b-button tag="button" native-type="submit" icon-left="save" type="is-primary">
-            Save
-          </b-button>
-        </b-field>
-      </form>
-    </div>
-    </div>
-  </section>
+                    <b-field label="Email">
+                        <b-input v-model="email" disabled></b-input>
+                    </b-field>
+                    <b-field label="Contact number">
+                        <b-input v-model="phone" type="number"
+                                 placeholder="Enter your Contact number" required>
+                        </b-input>
+                    </b-field>
+                    <b-field class="has-text-centered">
+                        <b-button tag="button" native-type="submit"
+                                  icon-left="save" type="is-primary">
+                            Save
+                        </b-button>
+                    </b-field>
+                </form>
+            </div>
+        </div>
+    </section>
 </template>
+
 <style>
 .profile-img {
-  display:block;
-  width:150px;
-  border-radius: 100%;
-  margin:auto;
+    display: block;
+    width: 150px;
+    border-radius: 100%;
+    margin: auto;
 }
 </style>
+
 <script>
 import firebase from 'firebase/app';
 import 'firebase/database';
