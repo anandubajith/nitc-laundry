@@ -5,7 +5,7 @@
                 <h2 class="is-size-3">Please fill in your details</h2>
                 <hr>
                 <img :src="photo" class="profile-img">
-                <form v-on:submit.prevent="addCA" autocomplete="off">
+                <form v-on:submit.prevent="saveUser" autocomplete="off">
                     <b-field label="Name">
                         <b-input v-model="name" placeholder="Enter your name"
                                  required></b-input>
@@ -72,7 +72,7 @@ import 'firebase/database';
 import 'firebase/auth';
 
 export default {
-  name: 'RegisterCA',
+  name: 'Register',
   data() {
     return {
       name: firebase.auth().currentUser.displayName,
@@ -86,7 +86,7 @@ export default {
     };
   },
   methods: {
-    addCA() {
+    saveUser() {
       firebase
         .database()
         .ref(`users/${firebase.auth().currentUser.uid}`)

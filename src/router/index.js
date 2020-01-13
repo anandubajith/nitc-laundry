@@ -7,7 +7,7 @@ import Home from '../views/Home.vue';
 import Login from '../views/Login.vue';
 import About from '../views/About.vue';
 import NewOrder from '../views/NewOrder.vue';
-import RegisterCA from '../views/RegisterCA.vue';
+import Register from '../views/Register.vue';
 
 Vue.use(VueRouter);
 
@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: RegisterCA,
+    component: Register,
     meta: {
       requiresAuth: true,
     },

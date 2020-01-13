@@ -74,7 +74,7 @@ import 'firebase/messaging';
 import Order from '../components/Order.vue';
 
 export default {
-  name: 'DashboardCA',
+  name: 'Dashboard',
   data() {
     return {
       orders: [],
