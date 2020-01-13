@@ -27,7 +27,8 @@
                                 <b-field>
                                     <b-button tag="input" native-type="submit"
                                           value="Add" type="is-primary">
-                                        Add</b-button>
+                                        Add
+                                    </b-button>
                                 </b-field>
 
                             </form>
