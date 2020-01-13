@@ -22,7 +22,6 @@
                                               controls-position="compact"
                                               placeholder="Quantity" max="100">
                                         </b-numberinput>
-
                                     </b-field>
                                 </b-field>
                                 <b-field>
@@ -33,7 +32,6 @@
 
                             </form>
                             <div class="box">
-
                                 <h3 class="is-size-4">Items in Order</h3>
                                 <hr>
                                 <div class="item" v-for="(item,key) in items" :key="key">
