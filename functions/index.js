@@ -28,14 +28,14 @@ exports.sendOrderUpdateNotification = functions.database.ref('orders/{uid}/{id}'
 });
 
 exports.cancelOrder = functions.https.onCall((data, context) => {
-  const oid = data.text;
+  const oid = data.key;
   const { uid } = context.auth;
   const ref = admin.database().ref(`orders/${uid}/${oid}`);
   return ref.once('value').then((snap) => {
     const order = snap.val();
     if (order && order.status === 'Pending') {
-      return ref.remove();
+      return ref.remove().then(() => 'Order Cancelled');
     }
-    return 'ok';
+    return 'Cancellation not allowed';
   });
 });

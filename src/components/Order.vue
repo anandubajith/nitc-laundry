@@ -1,5 +1,5 @@
 <template>
-  <div class="order box">
+  <div :class="['order', 'box', {'cancel': inProgress}]" >
       <div class="columns is-multiline">
           <div class="column is-vertical-center is-one-third">
               <b>Order #{{ order.createdAt.toString().substr(1,9) }}</b>
@@ -32,6 +32,12 @@
                 </b-tooltip>:
                 <b>{{ (new Date(order.deliveryDate)).toLocaleString() || ''}}</b>
             </p>
+            <b-button @click="cancelOrder"
+                      :disabled="inProgress"
+                      v-if="order.status === 'Pending'"
+                      type="is-danger">
+                      Cancel
+            </b-button>
           </div>
           </div>
       </div>
@@ -45,17 +51,39 @@
 .content ul {
     margin-top: 0
 }
+.cancel {
+  background: #eee;
+  text-decoration: line-through;
+}
 </style>
 <script>
+import firebase from 'firebase/app';
+import 'firebase/functions';
+
 export default {
   name: 'Order',
   data() {
     return {
       showDetails: false,
+      inProgress: false,
     };
   },
   props: {
     order: Object,
+  },
+  methods: {
+    cancelOrder() {
+      this.inProgress = true;
+      const cancelOrderFunction = firebase.functions().httpsCallable('cancelOrder');
+      cancelOrderFunction({ key: this.order['.key'] })
+        .then((result) => {
+          this.$buefy.toast.open({
+            message: result.data,
+            type: 'is-danger',
+          });
+        })
+        .then(() => { this.inProgress = false; });
+    },
   },
 };
 </script>
