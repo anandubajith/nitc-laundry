@@ -6,13 +6,13 @@ import 'firebase/messaging';
 import Buefy from 'buefy';
 // import 'firebase/analytics';
 import { rtdbPlugin } from 'vuefire';
-import 'buefy/dist/buefy.css';
+// import 'buefy/dist/buefy.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 // internal icons
 import {
   faCheck, faShoppingCart, faPlus, faMinus, faAngleLeft, faAngleRight,
-  faTrash, faWater, faEnvelope, faLock, faCalendar,
+  faTrash, faWater, faEnvelope, faLock, faCalendar, faSave,
   faEye, faEyeSlash, faCaretDown, faCaretUp,
 } from '@fortawesome/free-solid-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
@@ -24,7 +24,7 @@ import App from './App.vue';
 Vue.config.productionTip = false;
 
 library.add(faCheck, faPlus, faMinus, faTrash, faWater, faGoogle,
-  faEnvelope, faLock, faAngleLeft, faAngleRight, faCalendar,
+  faEnvelope, faLock, faAngleLeft, faAngleRight, faCalendar, faSave,
   faEye, faEyeSlash, faCaretDown, faShoppingCart, faCaretUp);
 
 Vue.component('vue-fontawesome', FontAwesomeIcon);

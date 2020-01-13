@@ -7,10 +7,10 @@
       <img :src="photo" class="profile-img">
       <form v-on:submit.prevent="addCA" autocomplete="off">
         <b-field label="Name">
-            <b-input v-model="name" placeholder="Enter your name"></b-input>
+            <b-input v-model="name" placeholder="Enter your name" required></b-input>
         </b-field>
         <b-field label="Roll Number">
-            <b-input v-model="roll" placeholder="Enter your Roll Number"></b-input>
+            <b-input v-model="roll" placeholder="Enter your Roll Number" required></b-input>
         </b-field>
         <b-field grouped>
 <b-field label="Hostel" expanded>
@@ -28,7 +28,7 @@
             </b-select>
         </b-field>
         <b-field label="Room number">
-            <b-input v-model="room" type="number" placeholder="Enter your Room number">
+            <b-input v-model="room" type="number" placeholder="Enter your Room number" required>
             </b-input>
         </b-field>
         </b-field>
@@ -37,11 +37,13 @@
             <b-input v-model="email" disabled></b-input>
         </b-field>
          <b-field label="Contact number">
-            <b-input v-model="phone" type="number" placeholder="Enter your Contact number">
+            <b-input v-model="phone" type="number" placeholder="Enter your Contact number" required>
             </b-input>
         </b-field>
         <b-field class="has-text-centered">
-          <b-button tag="input" native-type="submit" type="is-primary">Save</b-button>
+          <b-button tag="button" native-type="submit" icon-left="save" type="is-primary">
+            Save
+          </b-button>
         </b-field>
       </form>
     </div>

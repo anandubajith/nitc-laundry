@@ -27,8 +27,8 @@
           <div>
             <p>Total Cost: <b>₹{{ order.totalCost || 0 }}</b>
               <br>
-              Delivery Date<b-tooltip type="is-dark" label="Estimated">
-                    <b-icon size="is-small" icon="help-circle-outline"></b-icon>
+              <b-tooltip type="is-dark" label="Estimated">
+                Delivery Date
                 </b-tooltip>:
                 <b>{{ (new Date(order.deliveryDate)).toLocaleString() || ''}}</b>
             </p>

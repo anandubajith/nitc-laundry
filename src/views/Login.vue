@@ -43,7 +43,7 @@
                             icon-left="google"
                             icon-pack="fab"
                             size="is-large"
-                            type="is-info"
+                            type="is-google"
                             expanded>
                               Login with Google
                             </b-button>
