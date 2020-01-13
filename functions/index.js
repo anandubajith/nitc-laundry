@@ -26,3 +26,16 @@ exports.sendOrderUpdateNotification = functions.database.ref('orders/{uid}/{id}'
     console.log(`The read failed: ${errorObject.code}`);
   });
 });
+
+exports.cancelOrder = functions.https.onCall((data, context) => {
+  const oid = data.text;
+  const { uid } = context.auth;
+  const ref = admin.database().ref(`orders/${uid}/${oid}`);
+  return ref.once('value').then((snap) => {
+    const order = snap.val();
+    if (order && order.status === 'Pending') {
+      return ref.remove();
+    }
+    return 'ok';
+  });
+});
