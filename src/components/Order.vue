@@ -34,6 +34,7 @@
             </p>
             <b-button @click="cancelOrder"
                       :disabled="inProgress"
+                      icon-left="trash"
                       v-if="order.status === 'Pending'"
                       type="is-danger">
                       Cancel

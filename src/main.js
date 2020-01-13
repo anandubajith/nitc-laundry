@@ -8,12 +8,26 @@ import Buefy from 'buefy';
 import { rtdbPlugin } from 'vuefire';
 import 'buefy/dist/buefy.css';
 
-import App from './App.vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+// internal icons
+import {
+  faCheck, faShoppingCart, faPlus, faMinus, faAngleLeft, faAngleRight,
+  faTrash, faWater, faEnvelope, faLock, faCalendar,
+  faEye, faEyeSlash, faCaretDown, faCaretUp,
+} from '@fortawesome/free-solid-svg-icons';
+import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import router from './router';
+import App from './App.vue';
 
 
 Vue.config.productionTip = false;
 
+library.add(faCheck, faPlus, faMinus, faTrash, faWater, faGoogle,
+  faEnvelope, faLock, faAngleLeft, faAngleRight, faCalendar,
+  faEye, faEyeSlash, faCaretDown, faShoppingCart, faCaretUp);
+
+Vue.component('vue-fontawesome', FontAwesomeIcon);
 
 firebase.initializeApp({
   apiKey: 'AIzaSyBGRre0H5qgB_gsykdwACUPJO92KRlm0qU',
@@ -27,7 +41,10 @@ firebase.initializeApp({
 // firebase.analytics();
 
 Vue.use(rtdbPlugin);
-Vue.use(Buefy);
+Vue.use(Buefy, {
+  defaultIconComponent: 'vue-fontawesome',
+  defaultIconPack: 'fas',
+});
 
 let app = '';
 firebase.auth().onAuthStateChanged(() => {

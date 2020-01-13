@@ -6,7 +6,7 @@
                     <div class="box">
                       <div>
                         <b-icon
-                            icon="washing-machine"
+                            icon="water"
                             size="is-large">
                         </b-icon>
                         <br><br>
@@ -41,6 +41,7 @@
                       </div>
                             <b-button @click="socialLogin"
                             icon-left="google"
+                            icon-pack="fab"
                             size="is-large"
                             type="is-info"
                             expanded>

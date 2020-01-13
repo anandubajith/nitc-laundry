@@ -28,7 +28,7 @@
         <b-button
           tag="router-link"
           to="/order/new"
-          icon-left="cart"
+          icon-left="shopping-cart"
           size="is-large"
           type="is-link"
         >Place Order</b-button>

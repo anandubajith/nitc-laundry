@@ -79,8 +79,9 @@
                       <b-datetimepicker
                     placeholder="Click to select..."
                     v-model="deliveryDate"
-                    expanded
-                    icon="calendar-today">
+                    icon="calendar"
+
+                    expanded>
                 </b-datetimepicker>
                     </b-field>
                     <b-field>

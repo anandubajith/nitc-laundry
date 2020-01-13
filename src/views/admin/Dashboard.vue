@@ -31,6 +31,16 @@
                 <br><br>
               </div>
             </div>
+            <div class="box">
+              <h3 class="title is-size-3">Delivered</h3>
+              <div v-for="(order, i) in deliveredOrders " :key="i">
+                 <router-link :to="'/admin/order/'+order['uid']+'/'+order['oid']">
+                  OrderID: {{ order.createdAt.toString().substr(1,9) }}
+                 </router-link>
+                DeliveryDate: {{ (new Date(order.deliveryDate)).toLocaleString()}}
+                <br><br>
+              </div>
+            </div>
         </div>
     </section>
 </template>
@@ -102,6 +112,21 @@ export default {
           copy.uid = user['.key'];
           copy.oid = key;
           if (copy.status === 'OutForDelivery') {
+            pendingDelivery.push(copy);
+          }
+        });
+      });
+      // sort this by created at
+      return pendingDelivery.sort(compare2);
+    },
+    deliveredOrders() {
+      const pendingDelivery = [];
+      this.orders.forEach((user) => {
+        Object.keys(user).forEach((key) => {
+          const copy = user[key];
+          copy.uid = user['.key'];
+          copy.oid = key;
+          if (copy.status === 'Delivered') {
             pendingDelivery.push(copy);
           }
         });
