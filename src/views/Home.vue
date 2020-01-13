@@ -11,7 +11,7 @@
                         <h4 class="is-size-4">{{ userData.phone }}</h4>
                         <p>{{ userData.hostel + ' hostel'}} - {{ userData.room }}</p>
                         <p>{{ userData.roll }}</p>
-                        <p style="margin-top:10px" class="buttons">
+                        <p style="margin-top:10px" class="action">
                             <b-button :icon-right="notificationsActive ? 'check':'window-close'"
                                     :type="notificationsActive ? 'is-success': 'is-danger'"
                                     @click="enableNotifications">
@@ -47,20 +47,22 @@
 
 <style>
 .photo {
-    width: 200px;
-    border-radius: 100%;
+  width: 200px;
+  border-radius: 100%;
 }
-
+.action .button {
+  margin-right: 0.5rem;
+}
 @media screen and (max-width: 600px) {
-    .profile {
-        text-align: center;
-    }
-    .profile-block {
-        margin: auto;
-    }
-    .photo {
-        width: 120px;
-    }
+  .profile {
+    text-align: center;
+  }
+  .profile-block {
+    margin: auto;
+  }
+  .photo {
+    width: 120px;
+  }
 }
 </style>
 
