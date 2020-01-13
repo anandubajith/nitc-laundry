@@ -55,7 +55,9 @@ firebase.auth().onAuthStateChanged(() => {
     }).$mount('#app');
   }
 });
-
-firebase.messaging().onMessage((payload) => {
-  app.$buefy.toast.open(`<b>${payload.notification.title}</b><br> ${payload.notification.body}`);
-});
+if (firebase.messaging.isSupported()) {
+  firebase.messaging().onMessage((payload) => {
+    // firebase.analytics().logEvent('notification_received_in_page');
+    app.$buefy.toast.open(`<b>${payload.notification.title}</b><br> ${payload.notification.body}`);
+  });
+}

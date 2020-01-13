@@ -13,6 +13,7 @@
                         <p>{{ userData.roll }}</p>
                         <p style="margin-top:10px" class="action">
                             <b-button :icon-right="notificationsActive ? 'check':'window-close'"
+                                      v-if="notificationsSupported"
                                     :type="notificationsActive ? 'is-success': 'is-danger'"
                                     @click="enableNotifications">
                                 Notifications
@@ -83,7 +84,8 @@ export default {
       success: false,
       userData: {},
       name: '',
-      notificationsActive: firebase.messaging.isSupported && Notification.permission === 'granted',
+      notificationsSupported: firebase.messaging.isSupported(),
+      notificationsActive: firebase.messaging.isSupported() && Notification.permission === 'granted',
     };
   },
   components: {
@@ -96,12 +98,11 @@ export default {
       orders: firebase
         .database()
         .ref(`orders/${userId}`)
-        .orderByChild('createdAt')
         .limitToLast(10),
     };
   },
   beforeMount() {
-    if (firebase.messaging.isSupported) {
+    if (firebase.messaging.isSupported()) {
       firebase.messaging().onTokenRefresh(() => {
         firebase.messaging().getToken().then((refreshedToken) => {
           this.storeToken(refreshedToken);
@@ -117,11 +118,12 @@ export default {
       // This user is unregistered, prompt them to register
       this.$router.push('/register');
     }
+    // firebase.analytics().setUserProperties({ hostel: this.userData.hostel });
   },
   computed: {},
   methods: {
     enableNotifications() {
-      if (firebase.messaging.isSupported) {
+      if (firebase.messaging.isSupported()) {
         Notification.requestPermission()
           .then((permission) => {
             if (permission === 'granted') {
@@ -148,6 +150,7 @@ export default {
         .update({ token })
         .then(() => {
           this.$buefy.toast.open('Notifications active');
+          // log notificationActive Event
         });
     },
   },

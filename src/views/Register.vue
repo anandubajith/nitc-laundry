@@ -102,6 +102,7 @@ export default {
         .then(() => {
           this.success = true;
           this.$buefy.toast.open({ message: 'Details saved successfully', type: 'is-success' });
+          // firebase.analytics().logEvent('user_details_updated');
           this.$router.push('home');
         });
     },

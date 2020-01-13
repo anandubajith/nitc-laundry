@@ -167,6 +167,7 @@ export default {
         })
         .then(() => {
           this.$buefy.toast.open({ message: 'Order Placed', type: 'is-success' });
+          // firebase.analytics().logEvent('one_day_order_placed');
         })
         .then(() => {
           this.$router.replace('/home');
@@ -199,6 +200,7 @@ export default {
         })
         .then(() => {
           this.$buefy.toast.open({ message: 'Order Placed', type: 'is-success' });
+          // firebase.analytics().logEvent('regular_order_placed');
         })
         .then(() => {
           this.$router.replace('/home');
