@@ -9,7 +9,9 @@
                 <b>{{ order.status }}</b>
             </div>
             <div class="column is-one-third has-text-centered">
-                <b-button type="is-primary" @click="showDetails = !showDetails">
+                <b-button type="is-primary"
+                        @click="showDetails = !showDetails"
+                        :icon-right="showDetails ? 'caret-up' : 'caret-down'">
                     {{ showDetails ? 'Less' : 'More' }}
                 </b-button>
             </div>

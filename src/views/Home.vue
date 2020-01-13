@@ -27,7 +27,7 @@
             <hr />
             <div class="has-text-centered">
                 <b-button tag="router-link" to="/order/new"
-                    icon-left="shopping-cart" size="is-large" type="is-link">
+                    icon-left="shopping-cart" size="is-large" type="is-primary">
                     Place Order
                 </b-button>
             </div>

@@ -6,10 +6,9 @@ import 'firebase/messaging';
 import Buefy from 'buefy';
 // import 'firebase/analytics';
 import { rtdbPlugin } from 'vuefire';
-// import 'buefy/dist/buefy.css';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-// internal icons
+
 import {
   faCheck, faShoppingCart, faPlus, faMinus, faAngleLeft, faAngleRight,
   faTrash, faWater, faEnvelope, faLock, faCalendar, faSave,
