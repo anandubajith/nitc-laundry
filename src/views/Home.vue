@@ -18,7 +18,8 @@
                                     @click="enableNotifications">
                                 Notifications
                             </b-button>
-                            <b-button tag="router-link" type="is-info" to="/register">
+                            <b-button tag="router-link" icon-right="pencil-alt"
+                                      type="is-info" to="/register">
                               Edit Info
                             </b-button>
                         </p>
