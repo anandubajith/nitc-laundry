@@ -83,12 +83,13 @@
                                 <div>
                                     Total cost: <b>₹{{totalCost}}</b>
                                 </div>
-                            </div>
-                            <div class="box has-text-centered ">
-                                <b-button type="is-primary" @click="activeStep = 1"
+                                <hr>
+                                <div class="has-text-centered">
+                                  <b-button type="is-primary" @click="activeStep = 1"
                                           :disabled="totalCost === 0">
                                     Confirm Order
                                 </b-button>
+                                </div>
                             </div>
                         </b-step-item>
 
