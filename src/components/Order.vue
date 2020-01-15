@@ -19,8 +19,8 @@
         <div class="columns content" v-if="showDetails">
             <div class="column is-half is-vertical-center">
                 <ul>
-                    <li v-for="(item,key) in order.items" :key="key">
-                        {{ item.type }} x {{ item.quantity }}
+                    <li v-for="(count,name) in items" :key="name">
+                        {{name}} x {{ count }}
                     </li>
                 </ul>
             </div>
@@ -73,6 +73,17 @@ export default {
   },
   props: {
     order: Object,
+  },
+  computed: {
+    items() {
+      const items = {};
+      Object.keys(this.order.items).forEach((key) => {
+        if (this.order.items[key] !== 0) {
+          items[key] = this.order.items[key];
+        }
+      });
+      return items;
+    },
   },
   methods: {
     cancelOrder() {

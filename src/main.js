@@ -10,7 +10,7 @@ import { rtdbPlugin } from 'vuefire';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 import {
-  faCheck, faShoppingCart, faPlus, faMinus, faAngleLeft, faAngleRight,
+  faCheck, faShoppingCart, faPlus, faMinus, faAngleLeft, faAngleRight, faPencilAlt,
   faTrash, faWater, faEnvelope, faLock, faCalendar, faSave, faExclamationCircle,
   faEye, faEyeSlash, faCaretDown, faCaretUp,
 } from '@fortawesome/free-solid-svg-icons';
@@ -23,7 +23,7 @@ import App from './App.vue';
 Vue.config.productionTip = false;
 
 library.add(faCheck, faPlus, faMinus, faTrash, faWater, faGoogle, faExclamationCircle,
-  faEnvelope, faLock, faAngleLeft, faAngleRight, faCalendar, faSave,
+  faEnvelope, faLock, faAngleLeft, faAngleRight, faCalendar, faSave, faPencilAlt,
   faEye, faEyeSlash, faCaretDown, faShoppingCart, faCaretUp);
 
 Vue.component('vue-fontawesome', FontAwesomeIcon);

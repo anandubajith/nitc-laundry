@@ -3,44 +3,83 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-half">
-                    <b-steps v-model="activeStep" :animated="true" :has-navigation="false">
+                    <b-steps v-model="activeStep" :animated="true"
+                             :has-navigation="false">
                         <b-step-item label="Add Items">
-                            <form class="box" v-on:submit.prevent="addItem">
-                                <b-field grouped>
-                                    <b-field expanded>
-                                        <b-select placeholder="Garment Type"
-                                                v-model="type" required expanded>
-                                            <option value="Shirt">Shirt</option>
-                                            <option value="Jeans">Jeans</option>
-                                            <option value="Pants">Pants</option>
-                                            <option value="TShirt">T Shirt</option>
-                                            <option value="Other">Other</option>
-                                        </b-select>
-                                    </b-field>
-                                    <b-field>
-                                        <b-numberinput min="1" v-model="quantity"
-                                              controls-position="compact"
-                                              placeholder="Quantity" max="100">
-                                        </b-numberinput>
-                                    </b-field>
-                                </b-field>
-                                <b-field>
-                                    <b-button tag="input" native-type="submit"
-                                          value="Add" type="is-primary">
-                                        Add
-                                    </b-button>
-                                </b-field>
-
-                            </form>
                             <div class="box">
-                                <h3 class="is-size-4">Items in Order</h3>
+                                <h3 class="is-size-4">Add Items</h3>
                                 <hr>
-                                <div class="item" v-for="(item,key) in items" :key="key">
-                                    {{ item.type }} -
-                                    ( ₹{{ costModel[item.type]}} x {{ item.quantity }} )
-                                </div>
-                                <div v-if="items.length == 0">
-                                    No Items in order
+                                <div >
+                                    <b-field grouped>
+                                        <b-field expanded>
+                                          <div class="item-desc">
+                                            <p class="item-title">Shirt</p>
+                                            <p class="subtitle">₹11 each </p>
+                                          </div>
+                                        </b-field>
+                                        <b-field>
+                                            <b-numberinput min="0" v-model="items.Shirt"
+                                                                   controls-position="compact"
+                                                                   placeholder="Quantity" max="100">
+                                            </b-numberinput>
+                                        </b-field>
+                                    </b-field>
+                                    <b-field grouped>
+                                        <b-field expanded>
+                                          <div class="item-desc">
+                                            <p class="item-title">TShirt</p>
+                                            <p class="subtitle">₹9 each </p>
+                                            </div>
+                                        </b-field>
+                                        <b-field>
+                                            <b-numberinput min="0" v-model="items.TShirt"
+                                                                   controls-position="compact"
+                                                                   placeholder="Quantity" max="100">
+                                            </b-numberinput>
+                                        </b-field>
+                                    </b-field>
+                                    <b-field grouped>
+                                        <b-field expanded>
+                                          <div class="item-desc">
+                                            <p class="item-title">Pants</p>
+                                            <p class="subtitle">₹10 each </p>
+                                            </div>
+                                        </b-field>
+                                        <b-field>
+                                            <b-numberinput min="0" v-model="items.Pants"
+                                                                   controls-position="compact"
+                                                                   placeholder="Quantity" max="100">
+                                            </b-numberinput>
+                                        </b-field>
+                                    </b-field>
+                                       <b-field grouped>
+                                        <b-field expanded>
+                                          <div class="item-desc">
+                                            <p class="item-title">Jeans</p>
+                                            <p class="subtitle">₹12 each </p>
+                                            </div>
+                                        </b-field>
+                                        <b-field>
+                                            <b-numberinput min="0" v-model="items.Jeans"
+                                                                   controls-position="compact"
+                                                                   placeholder="Quantity" max="100">
+                                            </b-numberinput>
+                                        </b-field>
+                                    </b-field>
+                                       <b-field grouped>
+                                        <b-field expanded>
+                                            <div class="item-desc">
+                                              <p class="item-title">Other</p>
+                                            <p class="subtitle">Cost updated at time of pickup</p>
+                                              </div>
+                                        </b-field>
+                                        <b-field>
+                                            <b-numberinput min="0" v-model="items.Other"
+                                                                   controls-position="compact"
+                                                                   placeholder="Quantity" max="100">
+                                            </b-numberinput>
+                                        </b-field>
+                                    </b-field>
                                 </div>
                                 <hr>
                                 <div>
@@ -57,9 +96,24 @@
 
                         <b-step-item label="Confirm">
                             <div class="box">
-                                <h1 class="title has-text-centered">
-                                    Total Cost: ₹{{ totalCost }}
-                                </h1>
+                                <h3 class="is-size-4">Items in Order</h3>
+                                <hr>
+                                <div class="item" v-for="(val,key) in items" :key="key">
+                                  <div v-if="val != 0" >
+                                   {{ key }} - ( {{ val }} x ₹{{ costModel[key] }} )
+                                   - ₹{{ val *  costModel[key]}}
+                                  </div>
+                                </div>
+                                <div v-if="items.length == 0">
+                                    No Items in order
+                                </div>
+                                <hr>
+                                <div class="has-text-centered">
+                                    <b-button @click="activeStep = 0"
+                                    icon-left="pencil-alt" type="is-info">
+                                        Edit order
+                                    </b-button>
+                                </div>
                             </div>
                             <div class="box">
 
@@ -68,6 +122,14 @@
                                 </b-field>
                             </div>
                             <div class="box">
+                              <div class="columns is-centered">
+                                <div class="column">
+                                   <h1 class="title has-text-centered">
+                                    Total Cost: ₹{{ totalCost }}
+                                </h1>
+                                <hr>
+                                  </div>
+                                </div>
                                 <div class="columns is-centered">
                                     <div class="column is-half-tablet">
                                         <b-button type="is-primary" size="is-large"
@@ -84,7 +146,9 @@
                                 </div>
                                 <div class="columns">
                                     <div class="column" style="font-weight:bold;">
-                                        Note: *OneDay delivery costs +25% of Total
+                                        Note:<br>
+                                        * OneDay delivery costs extra 50% of total<br>
+                                        * Free delivery for orders over ₹50
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +160,16 @@
         </div>
     </section>
 </template>
-
+<style scoped>
+.item-title {
+  display:block;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.item-desc .subtitle {
+  font-size: 1em;
+}
+</style>
 <script>
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -106,17 +179,21 @@ export default {
   name: 'NewOrder',
   data() {
     return {
-      items: [],
+      items: {
+        Shirt: 0,
+        TShirt: 0,
+        Jeans: 0,
+        Pants: 0,
+        Other: 0,
+        DeliveryCharge: 0,
+      },
       type: null,
-      quantity: 1,
       activeStep: 0,
       costModel: {
         Shirt: 11,
         Jeans: 12,
         Pants: 10,
         TShirt: 9,
-        BedSheetSingle: 3,
-        BedSheetDouble: 4,
         Other: 0,
         DeliveryCharge: 20,
       },
@@ -125,9 +202,10 @@ export default {
   computed: {
     totalCost() {
       let total = 0;
-      this.items.forEach((item) => {
-        total += this.costModel[item.type] * item.quantity;
-      });
+      Object.keys(this.items)
+        .forEach((item) => {
+          total += this.costModel[item] * this.items[item];
+        });
       return total;
     },
     expressCost() {
@@ -135,17 +213,13 @@ export default {
     },
   },
   methods: {
-    addItem() {
-      this.items.push({ type: this.type, quantity: this.quantity });
-      this.type = null;
-      this.quantity = 1;
-    },
     doOneDayOrder() {
       if (this.totalCost <= 50) {
         this.$buefy.dialog.confirm({
           message: 'Minimum Order Cost of ₹50 is not met<br><b>DeliveryCharge: ₹20</b>',
           onConfirm: () => {
-            this.items.push({ type: 'DeliveryCharge', quantity: 1 });
+            this.items.DeliveryCharge = 1;
+            this.$forceUpdate();
             this.oneDayOrder();
           },
         });
@@ -178,7 +252,8 @@ export default {
         this.$buefy.dialog.confirm({
           message: 'Minimum Order Cost of ₹50 is not met<br><b>DeliveryCharge: ₹20</b>',
           onConfirm: () => {
-            this.items.push({ type: 'DeliveryCharge', quantity: 1 });
+            this.items.DeliveryCharge = 1;
+            this.$forceUpdate();
             this.regularOrder();
           },
         });

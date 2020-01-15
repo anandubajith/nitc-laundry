@@ -55,8 +55,8 @@
             <div class="box">
                 <h4 class="is-size-4 title">Items</h4>
                 <hr>
-                <div v-for="(item,key) in order.items" :key="key">
-                    {{ item.type }} x {{ item.quantity }}
+                <div v-for="(count,name) in items" :key="name">
+                        {{name}} x {{ count }}
                 </div>
             </div>
             <div class="box" v-if="order && order.remarks">
@@ -219,6 +219,17 @@ export default {
     // TODO: Fix this
     // this.status = this.order.status;
     // this.deliveryDate = this.order.deliveryDate;
+  },
+  computed: {
+    items() {
+      const items = {};
+      Object.keys(this.order.items).forEach((key) => {
+        if (this.order.items[key] !== 0) {
+          items[key] = this.order.items[key];
+        }
+      });
+      return items;
+    },
   },
   methods: {
     updateStatus() {
