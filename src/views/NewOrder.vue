@@ -191,7 +191,7 @@ export default {
         Jeans: 12,
         Pants: 10,
         TShirt: 9,
-        Other: 0,
+        Other: 1,
         DeliveryCharge: 20,
       },
       isLoading: false,

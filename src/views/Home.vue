@@ -14,8 +14,8 @@
                         <p style="margin-top:10px" class="action">
                             <b-button :icon-right="notificationsActive ? 'check':'window-close'"
                                       v-if="notificationsSupported"
-                                    :type="notificationsActive ? 'is-success': 'is-danger'"
-                                    @click="enableNotifications">
+                                      :type="notificationsActive ? 'is-success': 'is-danger'"
+                                      @click="enableNotifications">
                                 Notifications
                             </b-button>
                             <b-button tag="router-link" icon-right="pencil-alt"
