@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
     </div>
 </template>
 
@@ -41,15 +42,19 @@ export default {
     return {
       email: '',
       password: '',
+      isLoading: false,
     };
   },
   methods: {
     login() {
+      this.isLoading = true;
       firebase.auth().signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          this.isLoading = false;
           this.$router.replace('/admin/dashboard');
         })
         .catch((err) => {
+          this.isLoading = false;
           this.$buefy.toast.open({
             message: `Oops. ${err.message}`,
             type: 'is-danger',

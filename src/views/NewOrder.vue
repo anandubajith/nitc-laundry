@@ -114,20 +114,17 @@
                                 </div>
                             </div>
                             <div class="box">
+                              <h1 class="title has-text-centered">
+                                    Total Cost: ₹{{ totalCost }}
+                                </h1>
+                              </div>
+                            <div class="box">
 
                                 <b-field label="Remarks">
                                     <b-input maxlength="200" type="textarea"></b-input>
                                 </b-field>
                             </div>
                             <div class="box">
-                              <div class="columns is-centered">
-                                <div class="column">
-                                   <h1 class="title has-text-centered">
-                                    Total Cost: ₹{{ totalCost }}
-                                </h1>
-                                <hr>
-                                  </div>
-                                </div>
                                 <div class="columns is-centered">
                                     <div class="column is-half-tablet">
                                         <b-button type="is-primary" size="is-large"
