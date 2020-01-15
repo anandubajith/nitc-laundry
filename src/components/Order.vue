@@ -87,6 +87,15 @@ export default {
   },
   methods: {
     cancelOrder() {
+      this.$buefy.dialog.confirm({
+        title: 'Cancel Order',
+        message: 'Are you sure you want to <b>cancel</b> this order',
+        confirmText: 'Cancel Order',
+        type: 'is-danger',
+        onConfirm: () => this.doCancelOrder(),
+      });
+    },
+    doCancelOrder() {
       this.inProgress = true;
       const cancelOrderFunction = firebase.functions().httpsCallable('cancelOrder');
       cancelOrderFunction({ key: this.order['.key'] })
