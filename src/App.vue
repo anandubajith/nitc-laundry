@@ -89,4 +89,10 @@ $link-focus-border: $primary;
 .order .column {
   display: flex;
 }
+.order .column ul {
+  margin-top: 0;
+}
+.textarea:not([rows]) {
+  min-height: 80px;
+}
 </style>
