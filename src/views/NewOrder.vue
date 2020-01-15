@@ -7,8 +7,6 @@
                              :has-navigation="false">
                         <b-step-item label="Add Items">
                             <div class="box">
-                                <h3 class="is-size-4">Add Items</h3>
-                                <hr>
                                 <div >
                                     <b-field grouped>
                                         <b-field expanded>
@@ -86,9 +84,9 @@
                                     Total cost: <b>₹{{totalCost}}</b>
                                 </div>
                             </div>
-                            <div class="box buttons has-text-centered">
+                            <div class="box has-text-centered ">
                                 <b-button type="is-primary" @click="activeStep = 1"
-                                          :disabled="items.length < 1">
+                                          :disabled="totalCost === 0">
                                     Confirm Order
                                 </b-button>
                             </div>
@@ -96,7 +94,7 @@
 
                         <b-step-item label="Confirm">
                             <div class="box">
-                                <h3 class="is-size-4">Items in Order</h3>
+                                <h3 class="is-size-4">Items</h3>
                                 <hr>
                                 <div class="item" v-for="(val,key) in items" :key="key">
                                   <div v-if="val != 0" >
@@ -156,7 +154,7 @@
                     </b-steps>
                 </div>
             </div>
-
+         <b-loading :is-full-page="true" :active.sync="isLoading" :can-cancel="false"></b-loading>
         </div>
     </section>
 </template>
@@ -167,7 +165,8 @@
   font-weight: bold;
 }
 .item-desc .subtitle {
-  font-size: 1em;
+  font-size: 0.9em;
+  color: #666;
 }
 </style>
 <script>
@@ -197,6 +196,7 @@ export default {
         Other: 0,
         DeliveryCharge: 20,
       },
+      isLoading: false,
     };
   },
   computed: {
@@ -228,6 +228,7 @@ export default {
       }
     },
     oneDayOrder() {
+      this.isLoading = true;
       firebase
         .database()
         .ref(`orders/${firebase.auth().currentUser.uid}`)
@@ -240,6 +241,7 @@ export default {
           totalCost: this.expressCost,
         })
         .then(() => {
+          this.isLoading = false;
           this.$buefy.toast.open({ message: 'Order Placed', type: 'is-success' });
           // firebase.analytics().logEvent('one_day_order_placed');
         })
@@ -262,6 +264,7 @@ export default {
       }
     },
     regularOrder() {
+      this.isLoading = true;
       firebase
         .database()
         .ref(`orders/${firebase.auth().currentUser.uid}`)
@@ -274,6 +277,7 @@ export default {
           totalCost: this.totalCost,
         })
         .then(() => {
+          this.isLoading = false;
           this.$buefy.toast.open({ message: 'Order Placed', type: 'is-success' });
           // firebase.analytics().logEvent('regular_order_placed');
         })
