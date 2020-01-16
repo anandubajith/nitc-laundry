@@ -13,6 +13,7 @@ exports.sendOrderUpdateNotification = functions.database.ref('orders/{uid}/{id}'
         title: 'Order Status Updated',
         body: 'Tap here to check status of order',
         icon: 'https://l-test-5c357.firebaseapp.com/img/icons/android-chrome-192x192.png',
+        click_action: 'https://l-test-5c357.firebaseapp.com',
       },
     };
 
