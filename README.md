@@ -1,4 +1,5 @@
-# l
+# NIT-C Laundry
+
 
 ## Project setup
 ```
